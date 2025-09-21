@@ -12,8 +12,8 @@
   background-size: cover;
   background-position: center;
   color: white;
-  padding: 20px; /* Add padding for smaller screens */
-  box-sizing: border-box; /* Ensures padding doesn't add to the width/height */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .login-box {
@@ -26,7 +26,7 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
   text-align: center;
   max-width: 400px;
-  width: 100%; /* Changed from 90% to 100% to fill its container */
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -76,6 +76,37 @@
   color: #ccc;
 }
 
+
+/* --- Professional Feedback and Button Styles --- */
+
+.feedback-container {
+  min-height: 50px; /* Reserve space to prevent layout shift */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-feedback {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.login-feedback.error {
+  background-color: rgba(255, 77, 77, 0.15);
+  border: 1px solid #ff4d4d;
+  color: #ffbaba;
+}
+
+.login-feedback.success {
+  background-color: rgba(76, 175, 80, 0.15);
+  border: 1px solid #4CAF50;
+  color: #c8e6c9;
+}
+
 .login-button {
   width: 100%;
   padding: 12px;
@@ -87,32 +118,50 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: flex; /* Required to center spinner */
+  justify-content: center;
+  align-items: center;
+  height: 48px; /* Fixed height for consistency */
+  box-sizing: border-box;
 }
 
 .login-button:hover {
   background-color: #ff9800;
 }
 
-.error-message {
-  color: #ff4d4d;
-  margin-bottom: 15px;
+.login-button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+/* Spinner Animation for Button */
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #fff; /* Spinner color */
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 
 /* --- Media Queries for Responsiveness --- */
 
-/* For tablets and smaller devices (up to 768px) */
 @media (max-width: 768px) {
   .login-box {
     padding: 30px;
   }
 }
 
-/* For mobile phones (up to 480px) */
 @media (max-width: 480px) {
   .login-box {
-    padding: 25px; /* Adjust padding for small screens */
-    backdrop-filter: blur(5px); /* Reduce blur slightly for performance if needed */
+    padding: 25px;
+    backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
   }
 
@@ -129,6 +178,6 @@
   }
   
   .input-group input, .login-button {
-    padding: 14px; /* Make inputs slightly taller for easier tapping */
+    padding: 14px;
   }
 }

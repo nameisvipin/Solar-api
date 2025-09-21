@@ -2,30 +2,54 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../assets/styles/Login.css';
+import '../assets/styles/Login.css'; // Make sure the CSS is imported
 
 const LoginPage = () => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    // Reset states on new login attempt
+    setLoading(true);
+    setError('');
+    setSuccessMessage('');
+
     try {
       const response = await axios.post('https://test.bsesbrpl.co.in/solar_api/API/SOLARAPI/login', {
         user_id: userId,
         password: password
+      }, {
+        // Allow 401 status to not trigger catch
+        validateStatus: (status) => {
+          return status >= 200 && status < 500;  // Treat 401 as a valid response
+        }
       });
 
       if (response.data.Status === '200') {
         sessionStorage.setItem('token', response.data.Token);
-        navigate('/home');
+        setSuccessMessage('Login Successful! Redirecting...');
+
+        setTimeout(() => {
+          navigate('/home');
+        }, 1500);
+      } else if (response.data.Status === '401') {
+        setError(response.data.Message || 'Invalid Password / Unauthorized User');
+      } else if (response.data.Status === '500') {
+        setError(response.data.Message || 'Internal Server Error');
       } else {
-        setError('Login failed. Please check your credentials.');
+        setError("Something went wrong. Please try again later.");
       }
     } catch (err) {
-      setError('An error occurred during login.');
+      setError('An error occurred. Please check your connection and try again.');
+    } finally {
+      if (!successMessage) {
+        setLoading(false);
+      }
     }
   };
 
@@ -33,11 +57,9 @@ const LoginPage = () => {
     <div className="login-container">
       <div className="login-box">
         <div className="logo-container">
-          {/* You can add your logo here */}
-          <h1>Solaris</h1>
+          <h1>Solar API</h1>
         </div>
-        <h2>Welcome Back</h2>
-        <p>Enter your credentials to access your solar dashboard.</p>
+        <p>Enter your credentials to access the solar API panel.</p>
         <form onSubmit={handleLogin}>
           <div className="input-group">
             <label htmlFor="userId">User ID</label>
@@ -47,6 +69,7 @@ const LoginPage = () => {
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
               required
+              disabled={loading} // Disable input while loading
             />
           </div>
           <div className="input-group">
@@ -57,10 +80,19 @@ const LoginPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              disabled={loading} // Disable input while loading
             />
           </div>
-          {error && <p className="error-message">{error}</p>}
-          <button type="submit" className="login-button">Login</button>
+
+          {/* Container for feedback messages */}
+          <div className="feedback-container">
+            {error && <div className="login-feedback error">{error}</div>}
+            {successMessage && <div className="login-feedback success">{successMessage}</div>}
+          </div>
+
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? <div className="spinner"></div> : 'Login'}
+          </button>
         </form>
       </div>
     </div>
