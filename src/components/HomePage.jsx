@@ -90,7 +90,7 @@ const HomePage = () => {
         return (
           <form onSubmit={handleGetLatLong}>
             <h2>Get Latitude & Longitude by CA Number</h2>
-            <p>Fetches the geographical coordinates for a given Consumer Account number.</p>
+            <p>Fetches the geographical coordinates for a given CA number.</p>
             <div className="input-group">
               <label htmlFor="latLongCa">CA Number</label>
               <input 
@@ -108,7 +108,7 @@ const HomePage = () => {
         return (
           <form onSubmit={handleGetCaDetails}>
             <h2>Get CA Details</h2>
-            <p>Retrieves detailed information for a given Consumer Account number from SAP ISU.</p>
+            <p>Retrieves detailed information for a given CA number from SAP ISU.</p>
             <div className="input-group">
               <label htmlFor="caDetailsCa">CA Number</label>
               <input 
