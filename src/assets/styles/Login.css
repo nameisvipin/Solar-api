@@ -1,0 +1,94 @@
+/* src/assets/styles/Login.css */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* This is the most important part for the look */
+  background-image: url('../images/solar-background.png');
+  background-size: cover;
+  background-position: center;
+  color: white; /* Set default text color to white for the whole page */
+}
+
+.login-box {
+  /* This creates the see-through "glass" effect */
+  background: rgba(0, 0, 0, 0.4); /* Dark, semi-transparent background */
+  backdrop-filter: blur(10px); /* This blurs the background image behind the box */
+  -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
+  
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.logo-container h1 {
+  font-size: 2.5rem;
+  color: #ffc107; /* A nice solar yellow/gold color */
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.login-box h2 {
+  margin-bottom: 10px;
+  font-weight: 300;
+}
+
+.login-box p {
+  margin-bottom: 30px;
+  color: #e0e0e0;
+  font-size: 0.9rem;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #f0f0f0;
+  font-size: 0.85rem;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  box-sizing: border-box; /* Important for padding and width to work well together */
+}
+
+.input-group input::placeholder { /* Style for placeholder text */
+  color: #ccc;
+}
+
+.login-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffc107;
+  color: #1a1a1a;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #ff9800;
+}
+
+.error-message {
+  color: #ff4d4d;
+  margin-bottom: 15px;
+}
