@@ -21,9 +21,20 @@
   box-sizing: border-box;
 }
 
+/* This is the container for the icon and text */
 .navbar-logo {
+  display: flex; /* Aligns the icon and text horizontally */
+  align-items: center; /* Aligns them vertically in the middle */
   font-size: 1.25rem;
   color: #ffc107;
+  font-weight: bold;
+}
+
+/* This styles the SVG icon itself */
+.navbar-logo-icon {
+  height: 30px; /* Adjust the height of the logo */
+  width: 30px;  /* Adjust the width of the logo */
+  margin-right: 12px; /* Creates space between the icon and the text */
 }
 
 .logout-button {

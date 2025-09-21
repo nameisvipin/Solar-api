@@ -57,9 +57,18 @@ const LoginPage = () => {
     <div className="login-container">
       <div className="login-box">
         <div className="logo-container">
-          <h1>Solar API</h1>
+          <h1>
+            <img
+              src="/solar.svg"
+              alt="Solar API Logo"
+              className="login-logo-svg"
+            />
+            Solar API
+          </h1>
+
+
         </div>
-        <p>Enter your credentials to access the solar API panel.</p>
+
         <form onSubmit={handleLogin}>
           <div className="input-group">
             <label htmlFor="userId">User ID</label>

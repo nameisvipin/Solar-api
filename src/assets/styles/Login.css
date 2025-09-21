@@ -31,10 +31,20 @@
 }
 
 .logo-container h1 {
-  font-size: 2.5rem;
+  display: flex; /* Aligns image and text side-by-side */
+  align-items: center; /* Vertically centers them */
+  justify-content: center; /* Horizontally centers them */
+  font-size: 2.5rem; /* The font size for "Solar API" */
   color: #ffc107;
-  margin-bottom: 10px;
+  margin: 0;
+  margin-bottom: 20px;
   font-weight: bold;
+}
+
+.login-logo-svg {
+  height: 40px; /* Adjust the height of your logo */
+  width: 40px;  /* Adjust the width of your logo */
+  margin-right: 15px; /* Creates space between the logo and text */
 }
 
 .login-box h2 {

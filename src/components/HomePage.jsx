@@ -158,7 +158,15 @@ const HomePage = () => {
   return (
     <div className="home-container">
       <nav className="navbar">
-        <h1 className="navbar-logo">Solaris API Portal</h1>
+        <div className="navbar-logo">
+          <img
+              src="/solar.svg"
+              alt="Solar API Logo"
+              className="navbar-logo-icon"
+            />
+            <span>Solar API Portal</span>
+         
+          </div>
         <button onClick={handleLogout} className="logout-button">Logout</button>
       </nav>
       <main className="api-tester-main">
