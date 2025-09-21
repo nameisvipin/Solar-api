@@ -1,34 +1,38 @@
 /* src/assets/styles/Login.css */
+
+/* --- Base Styles for Desktop --- */
+
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  /* This is the most important part for the look */
+  width: 100vw;
   background-image: url('../images/solar-background.png');
   background-size: cover;
   background-position: center;
-  color: white; /* Set default text color to white for the whole page */
+  color: white;
+  padding: 20px; /* Add padding for smaller screens */
+  box-sizing: border-box; /* Ensures padding doesn't add to the width/height */
 }
 
 .login-box {
-  /* This creates the see-through "glass" effect */
-  background: rgba(0, 0, 0, 0.4); /* Dark, semi-transparent background */
-  backdrop-filter: blur(10px); /* This blurs the background image behind the box */
-  -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
-  
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.18);
   text-align: center;
   max-width: 400px;
-  width: 90%;
+  width: 100%; /* Changed from 90% to 100% to fill its container */
+  box-sizing: border-box;
 }
 
 .logo-container h1 {
   font-size: 2.5rem;
-  color: #ffc107; /* A nice solar yellow/gold color */
+  color: #ffc107;
   margin-bottom: 10px;
   font-weight: bold;
 }
@@ -64,10 +68,11 @@
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.1);
   color: white;
-  box-sizing: border-box; /* Important for padding and width to work well together */
+  box-sizing: border-box;
+  font-size: 1rem;
 }
 
-.input-group input::placeholder { /* Style for placeholder text */
+.input-group input::placeholder {
   color: #ccc;
 }
 
@@ -91,4 +96,39 @@
 .error-message {
   color: #ff4d4d;
   margin-bottom: 15px;
+}
+
+
+/* --- Media Queries for Responsiveness --- */
+
+/* For tablets and smaller devices (up to 768px) */
+@media (max-width: 768px) {
+  .login-box {
+    padding: 30px;
+  }
+}
+
+/* For mobile phones (up to 480px) */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 25px; /* Adjust padding for small screens */
+    backdrop-filter: blur(5px); /* Reduce blur slightly for performance if needed */
+    -webkit-backdrop-filter: blur(5px);
+  }
+
+  .logo-container h1 {
+    font-size: 2.2rem;
+  }
+
+  .login-box h2 {
+    font-size: 1.3rem;
+  }
+
+  .login-box p {
+    font-size: 0.9rem;
+  }
+  
+  .input-group input, .login-button {
+    padding: 14px; /* Make inputs slightly taller for easier tapping */
+  }
 }

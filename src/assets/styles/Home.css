@@ -1,10 +1,13 @@
 /* src/assets/styles/Home.css */
 
+/* --- Base Styles for Desktop --- */
+
 .home-container {
   background-color: #121212;
   color: #f0f0f0;
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
 }
 
 .navbar {
@@ -15,6 +18,7 @@
   height: 60px;
   background-color: #1e1e1e;
   border-bottom: 1px solid #333;
+  box-sizing: border-box;
 }
 
 .navbar-logo {
@@ -43,13 +47,14 @@
   gap: 30px;
   padding: 30px;
   height: calc(100vh - 60px); /* Full height minus navbar */
+  box-sizing: border-box;
 }
 
 .api-controls, .api-response-area {
   background-color: #1e1e1e;
   border-radius: 8px;
   padding: 25px;
-  overflow-y: auto;
+  overflow-y: auto; /* Allow scrolling for content that overflows */
 }
 
 /* Tabs Styling */
@@ -66,6 +71,7 @@
   padding: 15px 20px;
   cursor: pointer;
   font-size: 1rem;
+  font-weight: 500;
   border-bottom: 3px solid transparent;
   transition: all 0.2s ease-in-out;
 }
@@ -89,6 +95,7 @@
   color: #aaa;
   margin-bottom: 20px;
   font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .input-group {
@@ -111,6 +118,7 @@
   color: #f0f0f0;
   font-size: 1rem;
   box-sizing: border-box;
+  transition: border-color 0.2s ease;
 }
 
 .input-group input:focus {
@@ -121,6 +129,7 @@
 form button {
   width: 100%;
   padding: 12px;
+  margin-top: 10px;
   background-color: #ffc107;
   color: #121212;
   border: none;
@@ -133,6 +142,7 @@ form button {
 
 form button:disabled {
   background-color: #555;
+  color: #888;
   cursor: not-allowed;
 }
 
@@ -145,10 +155,11 @@ form button:disabled {
   background-color: #2c2c2c;
   padding: 15px;
   border-radius: 5px;
-  white-space: pre-wrap; /* Allows text to wrap */
-  word-wrap: break-word; /* Breaks long strings */
+  white-space: pre-wrap;
+  word-wrap: break-word;
   font-family: 'Courier New', Courier, monospace;
-  color: #4CAF50; /* Green for success */
+  color: #4CAF50;
+  font-size: 0.9rem;
 }
 
 .error-box {
@@ -157,6 +168,8 @@ form button:disabled {
   color: #ff4d4d;
   padding: 15px;
   border-radius: 5px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .placeholder-text {
@@ -167,8 +180,8 @@ form button:disabled {
 
 /* Loader Animation */
 .loader {
-  border: 5px solid #f3f3f3; /* Light grey */
-  border-top: 5px solid #ffc107; /* Yellow */
+  border: 5px solid #333;
+  border-top: 5px solid #ffc107;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -179,4 +192,72 @@ form button:disabled {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+
+/* --- Media Queries for Responsiveness --- */
+
+/* For tablets (up to 992px) - Stack the columns */
+@media (max-width: 992px) {
+  .api-tester-main {
+    /* Change from two columns to a single column layout */
+    grid-template-columns: 1fr;
+    height: auto; /* Allow height to grow with content */
+    padding: 20px;
+  }
+
+  .api-controls, .api-response-area {
+    /* Remove fixed height constraints */
+    height: auto;
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+/* For mobile phones (up to 480px) - Adjust padding and fonts */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0 15px; /* Reduce navbar padding */
+  }
+
+  .navbar-logo {
+    font-size: 1.1rem; /* Make logo text smaller */
+  }
+  
+  .logout-button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+
+  .api-tester-main {
+    padding: 15px; /* Reduce main padding */
+    gap: 15px; /* Reduce gap between sections */
+  }
+
+  .api-controls, .api-response-area {
+    padding: 15px; /* Reduce section padding */
+  }
+
+  .api-form-container h2 {
+    font-size: 1.2rem;
+  }
+  
+  .api-form-container p {
+    font-size: 0.85rem;
+  }
+
+  .api-tabs {
+    /* Allow tabs to wrap if they don't fit */
+    flex-wrap: wrap;
+  }
+
+  .api-tabs button {
+    padding: 12px 10px;
+    font-size: 0.85rem;
+    flex-grow: 1; /* Allow buttons to take equal space */
+  }
+
+  .response-box {
+    font-size: 0.8rem;
+  }
 }
