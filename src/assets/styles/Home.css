@@ -214,6 +214,43 @@ form button:disabled {
   margin-top: 50px;
 }
 
+/* Toast Notification Styling */
+.toast-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #2c2c2c;
+  color: #ffc107;
+  padding: 12px 20px;
+  border-radius: 5px;
+  border: 1px solid #ffc107;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease-in-out, fadeOut 0.3s ease-in-out 2.7s;
+  z-index: 1000;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 /* Loader Animation */
 .loader {
   border: 5px solid #333;
@@ -230,34 +267,38 @@ form button:disabled {
   100% { transform: rotate(360deg); }
 }
 
-
 /* --- Media Queries for Responsiveness --- */
 
 /* For tablets (up to 992px) - Stack the columns */
 @media (max-width: 992px) {
   .api-tester-main {
-    /* Change from two columns to a single column layout */
     grid-template-columns: 1fr;
-    height: auto; /* Allow height to grow with content */
+    height: auto;
     padding: 20px;
   }
 
   .api-controls, .api-response-area {
-    /* Remove fixed height constraints */
     height: auto;
     max-height: none;
     overflow-y: visible;
+  }
+
+  .toast-notification {
+    bottom: 15px;
+    right: 15px;
+    font-size: 0.85rem;
+    padding: 10px 15px;
   }
 }
 
 /* For mobile phones (up to 480px) - Adjust padding and fonts */
 @media (max-width: 480px) {
   .navbar {
-    padding: 0 15px; /* Reduce navbar padding */
+    padding: 0 15px;
   }
 
   .navbar-logo {
-    font-size: 1.1rem; /* Make logo text smaller */
+    font-size: 1.1rem;
   }
   
   .logout-button {
@@ -266,12 +307,12 @@ form button:disabled {
   }
 
   .api-tester-main {
-    padding: 15px; /* Reduce main padding */
-    gap: 15px; /* Reduce gap between sections */
+    padding: 15px;
+    gap: 15px;
   }
 
   .api-controls, .api-response-area {
-    padding: 15px; /* Reduce section padding */
+    padding: 15px;
   }
 
   .api-form-container h2 {
@@ -283,14 +324,13 @@ form button:disabled {
   }
 
   .api-tabs {
-    /* Allow tabs to wrap if they don't fit */
     flex-wrap: wrap;
   }
 
   .api-tabs button {
     padding: 12px 10px;
     font-size: 0.85rem;
-    flex-grow: 1; /* Allow buttons to take equal space */
+    flex-grow: 1;
   }
 
   .response-box {
@@ -300,5 +340,12 @@ form button:disabled {
   .copy-button svg {
     width: 16px;
     height: 16px;
+  }
+
+  .toast-notification {
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.8rem;
+    padding: 8px 12px;
   }
 }

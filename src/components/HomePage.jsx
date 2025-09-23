@@ -1,4 +1,3 @@
-// src/components/HomePage.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -17,6 +16,7 @@ const HomePage = () => {
   const [loading, setLoading] = useState(false);
   const [apiResponse, setApiResponse] = useState(null);
   const [apiError, setApiError] = useState('');
+  const [showToast, setShowToast] = useState(false);
 
   // State for the input fields of each form
   const [latLongCa, setLatLongCa] = useState('');
@@ -53,14 +53,10 @@ const HomePage = () => {
       setApiResponse(response.data);
     } catch (error) {
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         setApiError(`Error ${error.response.status}: ${error.response.data.Message || 'An error occurred.'}`);
       } else if (error.request) {
-        // The request was made but no response was received
         setApiError('Network Error: Could not connect to the API server.');
       } else {
-        // Something happened in setting up the request that triggered an Error
         setApiError(`An unexpected error occurred: ${error.message}`);
       }
     } finally {
@@ -87,7 +83,10 @@ const HomePage = () => {
   const handleCopyResponse = () => {
     if (apiResponse) {
       navigator.clipboard.writeText(JSON.stringify(apiResponse, null, 2))
-        .then(() => alert('Response copied to clipboard!'))
+        .then(() => {
+          setShowToast(true);
+          setTimeout(() => setShowToast(false), 3000); // Hide toast after 3 seconds
+        })
         .catch((err) => console.error('Failed to copy: ', err));
     }
   };
@@ -174,8 +173,7 @@ const HomePage = () => {
               className="navbar-logo-icon"
             />
             <span>Solar API Portal</span>
-         
-          </div>
+        </div>
         <button onClick={handleLogout} className="logout-button">Logout</button>
       </nav>
       <main className="api-tester-main">
@@ -220,6 +218,11 @@ const HomePage = () => {
           )}
           {!loading && !apiError && !apiResponse && (
             <p className="placeholder-text">The API response will appear here once you make a request.</p>
+          )}
+          {showToast && (
+            <div className="toast-notification">
+              Copied to clipboard!
+            </div>
           )}
         </div>
       </main>
